@@ -5,15 +5,15 @@ import 'package:flutter/services.dart';
 import 'package:soundpool/soundpool.dart';
 
 class Sound extends StatefulWidget {
-  final Widget child;
+  final Widget? child;
 
-  const Sound({Key key, this.child}) : super(key: key);
+  const Sound({Key? key, this.child}) : super(key: key);
 
   @override
   SoundState createState() => SoundState();
 
   static SoundState of(BuildContext context) {
-    final state = context.findAncestorStateOfType<SoundState>();
+    final state = context.findAncestorStateOfType<SoundState>()!;
     assert(state != null, 'can not find Sound widget');
     return state;
   }
@@ -29,9 +29,9 @@ const _SOUNDS = [
 ];
 
 class SoundState extends State<Sound> {
-  Soundpool _pool;
+  late Soundpool _pool;
 
-  Map<String, int> _soundIds;
+  late Map<String, int> _soundIds;
 
   bool mute = false;
 
@@ -63,7 +63,7 @@ class SoundState extends State<Sound> {
 
   @override
   Widget build(BuildContext context) {
-    return widget.child;
+    return widget.child!;
   }
 
   void start() {

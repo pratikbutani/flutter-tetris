@@ -148,7 +148,7 @@ class SystemButtonGroup extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         _Description(
-          text: S.of(context).sounds,
+          text: S.of(context)!.sounds,
           child: _Button(
               size: _SYSTEM_BUTTON_SIZE,
               color: _systemButtonColor,
@@ -158,7 +158,7 @@ class SystemButtonGroup extends StatelessWidget {
               }),
         ),
         _Description(
-          text: S.of(context).pause_resume,
+          text: S.of(context)!.pause_resume,
           child: _Button(
               size: _SYSTEM_BUTTON_SIZE,
               color: _systemButtonColor,
@@ -168,7 +168,7 @@ class SystemButtonGroup extends StatelessWidget {
               }),
         ),
         _Description(
-          text: S.of(context).reset,
+          text: S.of(context)!.reset,
           child: _Button(
               size: _SYSTEM_BUTTON_SIZE,
               enableLongPress: false,
@@ -216,7 +216,7 @@ class LeftController extends StatelessWidget {
 
 class _Button extends StatefulWidget {
   final Size size;
-  final Widget icon;
+  final Widget? icon;
 
   final VoidCallback onTap;
 
@@ -226,9 +226,9 @@ class _Button extends StatefulWidget {
   final bool enableLongPress;
 
   const _Button(
-      {Key key,
-      @required this.size,
-      @required this.onTap,
+      {Key? key,
+      required this.size,
+      required this.onTap,
       this.icon,
       this.color = Colors.blue,
       this.enableLongPress = true})
@@ -242,14 +242,14 @@ class _Button extends StatefulWidget {
 
 ///show a hint text for child widget
 class _Description extends StatelessWidget {
-  final String text;
+  final String? text;
 
-  final Widget child;
+  final Widget? child;
 
   final AxisDirection direction;
 
   const _Description({
-    Key key,
+    Key? key,
     this.text,
     this.direction = AxisDirection.down,
     this.child,
@@ -258,28 +258,28 @@ class _Description extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget widget;
+    late Widget widget;
     switch (direction) {
       case AxisDirection.right:
         widget = Row(
             mainAxisSize: MainAxisSize.min,
-            children: <Widget>[child, SizedBox(width: 8), Text(text)]);
+            children: <Widget>[child!, SizedBox(width: 8), Text(text!)]);
         break;
       case AxisDirection.left:
         widget = Row(
-          children: <Widget>[Text(text), SizedBox(width: 8), child],
+          children: <Widget>[Text(text!), SizedBox(width: 8), child!],
           mainAxisSize: MainAxisSize.min,
         );
         break;
       case AxisDirection.up:
         widget = Column(
-          children: <Widget>[Text(text), SizedBox(height: 8), child],
+          children: <Widget>[Text(text!), SizedBox(height: 8), child!],
           mainAxisSize: MainAxisSize.min,
         );
         break;
       case AxisDirection.down:
         widget = Column(
-          children: <Widget>[child, SizedBox(height: 8), Text(text)],
+          children: <Widget>[child!, SizedBox(height: 8), Text(text!)],
           mainAxisSize: MainAxisSize.min,
         );
         break;
@@ -292,11 +292,11 @@ class _Description extends StatelessWidget {
 }
 
 class _ButtonState extends State<_Button> {
-  Timer _timer;
+  Timer? _timer;
 
   bool _tapEnded = false;
 
-  Color _color;
+  Color? _color;
 
   @override
   void didUpdateWidget(_Button oldWidget) {

@@ -4,16 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class GameMaterial extends StatefulWidget {
-  final Widget child;
+  final Widget? child;
 
-  const GameMaterial({Key key, this.child}) : super(key: key);
+  const GameMaterial({Key? key, this.child}) : super(key: key);
 
   @override
   _GameMaterialState createState() => _GameMaterialState();
 
-  static ui.Image getMaterial(BuildContext context) {
+  static ui.Image? getMaterial(BuildContext context) {
     final _GameMaterialState state =
-        context.findAncestorStateOfType<_GameMaterialState>();
+        context.findAncestorStateOfType<_GameMaterialState>()!;
     assert(state != null, "can not find GameMaterial widget");
     return state.material;
   }
@@ -21,7 +21,7 @@ class GameMaterial extends StatefulWidget {
 
 class _GameMaterialState extends State<GameMaterial> {
   ///the image data of /assets/material.png
-  ui.Image material;
+  ui.Image? material;
 
   @override
   void initState() {
@@ -43,6 +43,6 @@ class _GameMaterialState extends State<GameMaterial> {
 
   @override
   Widget build(BuildContext context) {
-    return material == null ? Container() : widget.child;
+    return material == null ? Container() : widget.child!;
   }
 }

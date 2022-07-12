@@ -16,7 +16,7 @@ class Screen extends StatelessWidget {
   ///the with of screen
   final double width;
 
-  const Screen({Key key, @required this.width}) : super(key: key);
+  const Screen({Key? key, required this.width}) : super(key: key);
 
   Screen.fromHeight(double height) : this(width: ((height - 6) / 2 + 6) / 0.6);
 
@@ -25,7 +25,7 @@ class Screen extends StatelessWidget {
     //play panel need 60%
     final playerPanelWidth = width * 0.6;
     return Shake(
-      shake: GameState.of(context).states == GameStates.drop,
+      shake: GameState.of(context)!.states == GameStates.drop,
       child: SizedBox(
         height: (playerPanelWidth - 6) * 2 + 6,
         width: width,
@@ -57,7 +57,7 @@ class Shake extends StatefulWidget {
   ///true to shake screen vertically
   final bool shake;
 
-  const Shake({Key key, @required this.child, @required this.shake})
+  const Shake({Key? key, required this.child, required this.shake})
       : super(key: key);
 
   @override
@@ -66,7 +66,7 @@ class Shake extends StatefulWidget {
 
 ///摇晃屏幕
 class _ShakeState extends State<Shake> with TickerProviderStateMixin {
-  AnimationController _controller;
+  late AnimationController _controller;
 
   @override
   void initState() {

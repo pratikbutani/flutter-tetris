@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:overlay_support/overlay_support.dart';
@@ -36,9 +38,10 @@ class DonationDialog extends StatelessWidget {
           text: "支付宝红包码",
           onTap: () async {
             await Clipboard.setData(ClipboardData(text: HONG_BAO));
-            final data = await Clipboard.getData(Clipboard.kTextPlain);
+            final data = await (Clipboard.getData(Clipboard.kTextPlain)
+                as FutureOr<ClipboardData>);
             if (data.text == HONG_BAO) {
-              showSimpleNotification(context, Text("已复制到粘贴板 （≧ｙ≦＊）"));
+              showSimpleNotification(Text("已复制到粘贴板 （≧ｙ≦＊）"));
             } else {
               await showDialog(
                   context: context,
@@ -55,7 +58,7 @@ class DonationDialog extends StatelessWidget {
 class _SingleFieldDialog extends StatelessWidget {
   final String text;
 
-  const _SingleFieldDialog({Key key, @required this.text}) : super(key: key);
+  const _SingleFieldDialog({Key? key, required this.text}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -73,9 +76,9 @@ class _SingleFieldDialog extends StatelessWidget {
 }
 
 class _ReceiptDialog extends StatelessWidget {
-  final String image;
+  final String? image;
 
-  const _ReceiptDialog({Key key, this.image}) : super(key: key);
+  const _ReceiptDialog({Key? key, this.image}) : super(key: key);
 
   const _ReceiptDialog.weChat() : this(image: "assets/wechat.png");
 
@@ -87,7 +90,7 @@ class _ReceiptDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: borderRadius),
-      child: ClipRRect(borderRadius: borderRadius, child: Image.asset(image)),
+      child: ClipRRect(borderRadius: borderRadius, child: Image.asset(image!)),
     );
   }
 }
@@ -97,7 +100,7 @@ class _ActionTile extends StatelessWidget {
 
   final String text;
 
-  const _ActionTile({Key key, @required this.onTap, @required this.text})
+  const _ActionTile({Key? key, required this.onTap, required this.text})
       : super(key: key);
 
   @override

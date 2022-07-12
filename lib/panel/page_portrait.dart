@@ -37,7 +37,7 @@ class PagePortrait extends StatelessWidget {
 
 class RewardButton extends StatefulWidget {
   const RewardButton({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -56,14 +56,14 @@ class _RewardButtonState extends State<RewardButton> {
         onPressed: () {
           showDialog(context: context, builder: (context) => DonationDialog());
         },
-        child: Text(S.of(context).reward));
+        child: Text(S.of(context)!.reward));
   }
 }
 
 class _ScreenDecoration extends StatelessWidget {
   final Widget child;
 
-  const _ScreenDecoration({Key key, @required this.child}) : super(key: key);
+  const _ScreenDecoration({Key? key, required this.child}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

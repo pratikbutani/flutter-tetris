@@ -10,15 +10,15 @@ description: A new Flutter project.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.0.0-dev.68.0 <3.0.0"
+  sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  overlay_support: ^0.0.4
-  soundpool: ^1.0.1
+  overlay_support: ^2.0.1
+  soundpool: ^2.3.0
 
 dev_dependencies:
   flutter_test:
